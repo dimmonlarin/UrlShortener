@@ -1,0 +1,5 @@
+make_template_fragment_key
+Extension
+nodes
+CacheExtension
+JINJA_CACHE_ATTR_NAME

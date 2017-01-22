@@ -20,6 +20,7 @@
     <RootNamespace>UrlShortener</RootNamespace>
     <InterpreterId>{f526bcc5-c2c6-49cf-addd-6222b80a8d77}</InterpreterId>
     <InterpreterVersion>3.4</InterpreterVersion>
+    <WebBrowserPort>63250</WebBrowserPort>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

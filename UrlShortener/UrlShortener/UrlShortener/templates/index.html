@@ -2,32 +2,45 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1>Flask</h1>
-    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="form-group">
+    <label for="usr">Url:</label>
+    <input type="text" class="form-control" id="url">
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Flask gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://flask.pocoo.org/docs/">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Python Tools for Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
+<button type="button" class="btn btn-primary" id="shorten">Make it short!</button>
+<div>
+    <label for="usr">Short url:</label>
+    <a id="short_url"></a>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    $("#shorten").on("click", function () {
+        var url = $("#url").val();
+        if (!validateURL(url)) {
+            alert("Url is not valid!");
+            return;
+        }
 
+        var data = new FormData();
+        data.append('url', url);
+        $.ajax({
+            type: "POST",
+            url: "/add_url",
+            contentType: false,
+            data: data,
+            dataType: 'json',
+            processData: false
+        })
+        .done(function (data) {
+            var short_url = window.location + "url/" + data.url;
+            $("#short_url").attr("href", short_url);
+            $("#short_url").html(short_url);
+        });
+    });
+    function validateURL(textval) {
+        var urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+        return urlregex.test(textval);
+    }
+
+</script>
 {% endblock %}
