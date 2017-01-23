@@ -39,6 +39,7 @@
     <Compile Include="UrlShortener\views.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\" />
     <Folder Include="UrlShortener\" />
     <Folder Include="UrlShortener\static\" />
     <Folder Include="UrlShortener\static\content\" />
@@ -48,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
+    <Content Include="Scripts\scripts.sql" />
     <Content Include="UrlShortener\static\content\bootstrap.css" />
     <Content Include="UrlShortener\static\content\bootstrap.min.css" />
     <Content Include="UrlShortener\static\content\site.css" />
